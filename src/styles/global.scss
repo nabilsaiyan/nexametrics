@@ -1,0 +1,221 @@
+@use './variables' as *;
+@use './reset';
+@use './typography';
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inconsolata:wght@400;600;700&display=swap');
+
+// ─────────────────────────────────────────────────────────────
+// DARK THEME  (default)
+// ─────────────────────────────────────────────────────────────
+:root {
+  // Backgrounds
+  --bg-0: #07080f;
+  --bg-1: #0d0f1a;
+  --bg-2: #131622;
+  --bg-3: #181b2a;
+  --header-bg: rgba(13, 15, 26, 0.92);
+
+  // Borders
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(124, 58, 237, 0.38);
+  --border-half: rgba(255, 255, 255, 0.03);
+
+  // Accent — same in both themes
+  --accent:      #7c3aed;
+  --accent-soft: #a78bfa;
+
+  // Accent alpha tokens (violet)
+  --a-a03: rgba(124, 58, 237, 0.03);
+  --a-a04: rgba(124, 58, 237, 0.04);
+  --a-a06: rgba(124, 58, 237, 0.06);
+  --a-a08: rgba(124, 58, 237, 0.08);
+  --a-a10: rgba(124, 58, 237, 0.10);
+  --a-a12: rgba(124, 58, 237, 0.12);
+  --a-a14: rgba(124, 58, 237, 0.14);
+  --a-a15: rgba(124, 58, 237, 0.15);
+  --a-a20: rgba(124, 58, 237, 0.20);
+  --a-a25: rgba(124, 58, 237, 0.25);
+  --a-a40: rgba(124, 58, 237, 0.40);
+
+  // Accent-soft alpha tokens (purple)
+  --as-a12: rgba(167, 139, 250, 0.12);
+  --as-a15: rgba(167, 139, 250, 0.15);
+  --as-a40: rgba(167, 139, 250, 0.40);
+
+  // Status colors
+  --green: #34d399;
+  --g-a10: rgba(52, 211, 153, 0.10);
+  --g-a12: rgba(52, 211, 153, 0.12);
+
+  --amber: #fbbf24;
+  --am-a08: rgba(251, 191, 36, 0.08);
+  --am-a12: rgba(251, 191, 36, 0.12);
+  --am-a20: rgba(251, 191, 36, 0.20);
+  --am-a25: rgba(251, 191, 36, 0.25);
+
+  --red: #f87171;
+  --r-a08: rgba(248, 113, 113, 0.08);
+  --r-a10: rgba(248, 113, 113, 0.10);
+  --r-a12: rgba(248, 113, 113, 0.12);
+
+  // Text
+  --t1: #eef0f8;
+  --t2: #7d8aa8;
+  --t3: #3e4a66;
+  --t3-a12: rgba(62, 74, 102, 0.12);
+  --t3-a15: rgba(62, 74, 102, 0.15);
+
+  // Effects
+  --card-shadow: 0 4px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(124, 58, 237, 0.07);
+  --scrollbar-thumb: rgba(124, 58, 237, 0.25);
+  --scrollbar-hover: rgba(124, 58, 237, 0.40);
+  --shimmer-from: #131622;
+  --shimmer-shine: rgba(62, 74, 102, 0.15);
+  --toast-bg: #1a1d2c;
+  --toast-border: rgba(124, 58, 237, 0.22);
+  --toast-text: #eef0f8;
+  --overlay: rgba(0, 0, 0, 0.65);
+  --dropdown-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(124, 58, 237, 0.10);
+
+  // Charts
+  --chart-grid: rgba(124, 58, 237, 0.05);
+  --chart-axis: #3e4a66;
+  --chart-axis-label: #7d8aa8;
+  --chart-tooltip-bg: #131622;
+  --chart-tooltip-border: rgba(124, 58, 237, 0.22);
+  --chart-tooltip-label: #7d8aa8;
+  --chart-tooltip-value: #eef0f8;
+}
+
+// ─────────────────────────────────────────────────────────────
+// LIGHT THEME
+// ─────────────────────────────────────────────────────────────
+[data-theme='light'] {
+  --bg-0: #f0f2f9;
+  --bg-1: #f7f8fd;
+  --bg-2: #ffffff;
+  --bg-3: #eef0f7;
+  --header-bg: rgba(247, 248, 253, 0.92);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(124, 58, 237, 0.28);
+  --border-half: rgba(0, 0, 0, 0.04);
+  --t1: #0e1229;
+  --t2: #4a5578;
+  --t3: #8a9bb8;
+  --t3-a12: rgba(138, 155, 184, 0.18);
+  --t3-a15: rgba(138, 155, 184, 0.22);
+  --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.07), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --scrollbar-thumb: rgba(124, 58, 237, 0.20);
+  --scrollbar-hover: rgba(124, 58, 237, 0.35);
+  --shimmer-from: #eef0f7;
+  --shimmer-shine: rgba(100, 110, 150, 0.12);
+  --toast-bg: #ffffff;
+  --toast-border: rgba(124, 58, 237, 0.18);
+  --toast-text: #0e1229;
+  --overlay: rgba(0, 0, 0, 0.45);
+  --dropdown-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.07);
+  --chart-grid: rgba(0, 0, 0, 0.05);
+  --chart-axis: #9aa8c0;
+  --chart-axis-label: #4a5578;
+  --chart-tooltip-bg: #ffffff;
+  --chart-tooltip-border: rgba(0, 0, 0, 0.09);
+  --chart-tooltip-label: #4a5578;
+  --chart-tooltip-value: #0e1229;
+}
+
+// ─────────────────────────────────────────────────────────────
+// BASE
+// ─────────────────────────────────────────────────────────────
+:root {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15.5px;
+  background-color: var(--bg-0);
+  color: var(--t1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-0);
+  color: var(--t1);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15.5px;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// ─────────────────────────────────────────────────────────────
+// SCROLLBAR
+// ─────────────────────────────────────────────────────────────
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-1); }
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+  &:hover { background: var(--scrollbar-hover); }
+}
+
+// ─────────────────────────────────────────────────────────────
+// UTILITIES
+// ─────────────────────────────────────────────────────────────
+.number, .mono, [data-mono] { font-family: 'Inconsolata', monospace; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+// ─────────────────────────────────────────────────────────────
+// KEYFRAMES
+// ─────────────────────────────────────────────────────────────
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0   var(--a-a40); }
+  50%       { box-shadow: 0 0 0 6px transparent;  }
+}
+
+@keyframes pulse-glow-purple {
+  0%, 100% { box-shadow: 0 0 0 0   var(--as-a40); }
+  50%       { box-shadow: 0 0 0 6px transparent;   }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes live-flash {
+  0%   { background-color: var(--am-a20); }
+  100% { background-color: transparent; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ─────────────────────────────────────────────────────────────
+// RECHARTS THEME OVERRIDES
+// ─────────────────────────────────────────────────────────────
+.recharts-cartesian-axis-tick-value,
+.recharts-polar-angle-axis-tick-value {
+  fill: var(--chart-axis);
+  font-family: 'Space Grotesk', sans-serif;
+}
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line,
+.recharts-cartesian-grid line {
+  stroke: var(--chart-grid);
+}
+.recharts-legend-item-text {
+  color: var(--chart-axis-label) !important;
+}

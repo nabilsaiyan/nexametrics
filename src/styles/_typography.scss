@@ -1,0 +1,48 @@
+@use './variables' as *;
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: $text-primary;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $text-primary;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+p {
+  color: $text-secondary;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.mono {
+  font-family: 'Inconsolata', monospace;
+}
+
+.text-primary   { color: $text-primary; }
+.text-secondary { color: $text-secondary; }
+.text-muted     { color: $text-muted; }
+.text-cyan      { color: $accent-cyan; }
+.text-green     { color: $accent-green; }
+.text-amber     { color: $accent-amber; }
+.text-red       { color: $accent-red; }
+.text-purple    { color: $accent-purple; }
