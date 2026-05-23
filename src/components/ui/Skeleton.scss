@@ -1,0 +1,29 @@
+@use '../../styles/variables' as *;
+
+.skeleton {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    $bg-card 0%,
+    var(--t3-a15) 50%,
+    $bg-card 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-card {
+  background: $bg-card;
+  border-radius: $card-radius;
+  padding: 20px;
+  box-shadow: $card-shadow;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

@@ -1,0 +1,52 @@
+@use '../../styles/variables' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+
+  &--cyan {
+    background: var(--a-a12);
+    color: $accent-cyan;
+  }
+
+  &--green {
+    background: var(--g-a12);
+    color: $accent-green;
+  }
+
+  &--amber {
+    background: var(--am-a12);
+    color: $accent-amber;
+  }
+
+  &--red {
+    background: var(--r-a12);
+    color: $accent-red;
+  }
+
+  &--purple {
+    background: var(--as-a12);
+    color: $accent-purple;
+    animation: pulse-glow-purple 2.5s infinite;
+  }
+
+  &--muted {
+    background: var(--t3-a12);
+    color: $text-muted;
+  }
+
+  &--blue {
+    background: rgba(59, 130, 246, 0.12);
+    color: #60a5fa;
+  }
+
+  &--pulse {
+    animation: pulse-glow 2.5s infinite;
+  }
+}
