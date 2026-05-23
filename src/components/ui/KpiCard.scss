@@ -1,0 +1,134 @@
+@use '../../styles/variables' as *;
+
+.kpi-card {
+  background: $bg-card;
+  border-radius: $card-radius;
+  padding: 22px;
+  box-shadow: $card-shadow;
+  border: 1px solid $border;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: $transition;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, $accent-cyan, $accent-purple);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  &:hover {
+    background: $bg-card-hover;
+    border-color: rgba(124, 58, 237, 0.18);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(124, 58, 237, 0.12);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &--loading {
+    pointer-events: none;
+  }
+
+  &__skeleton-header,
+  &__skeleton-value,
+  &__skeleton-trend {
+    border-radius: 6px;
+    background: linear-gradient(90deg, $bg-card 0%, var(--t3-a12) 50%, $bg-card 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+  }
+
+  &__skeleton-header {
+    height: 11px;
+    width: 55%;
+  }
+
+  &__skeleton-value {
+    height: 32px;
+    width: 48%;
+  }
+
+  &__skeleton-trend {
+    height: 10px;
+    width: 38%;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 0.7375rem;
+    font-weight: 600;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  &__icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(124, 58, 237, 0.1);
+    border-radius: 9px;
+    color: $accent-cyan;
+    border: 1px solid rgba(124, 58, 237, 0.15);
+  }
+
+  &__value {
+        font-size: 1.875rem;
+    font-weight: 800;
+    color: $text-primary;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 2px;
+  }
+
+  &__change {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7375rem;
+    font-weight: 600;
+    padding: 3px 7px;
+    border-radius: 6px;
+
+    &--up {
+      color: $accent-green;
+      background: rgba(52, 211, 153, 0.1);
+    }
+
+    &--down {
+      color: $accent-red;
+      background: rgba(248, 113, 113, 0.1);
+    }
+  }
+
+  &__sparkline {
+    width: 80px;
+    flex-shrink: 0;
+  }
+}

@@ -1,0 +1,126 @@
+@use '../../styles/variables' as *;
+
+.data-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  &__th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid $border;
+    white-space: nowrap;
+    user-select: none;
+
+    &--sortable {
+      cursor: pointer;
+
+      &:hover {
+        color: $text-secondary;
+      }
+    }
+  }
+
+  &__th-inner {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__sort-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    color: $text-muted;
+
+    svg.active {
+      color: $accent-cyan;
+    }
+  }
+
+  &__td {
+    padding: 12px 14px;
+    border-bottom: 1px solid $border;
+    font-size: 0.8125rem;
+    color: $text-secondary;
+    vertical-align: middle;
+    transition: $transition;
+  }
+
+  &__row {
+    transition: $transition;
+
+    &--clickable {
+      cursor: pointer;
+
+      &:hover {
+        background: var(--a-a03);
+
+        .data-table__td {
+          transform: none;
+          border-left: none;
+        }
+
+        td:first-child {
+          border-left: 2px solid var(--a-a40);
+        }
+      }
+    }
+
+    &--new {
+      animation: live-flash 1.2s ease forwards;
+    }
+  }
+
+  &__skeleton {
+    display: block;
+    height: 12px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, $bg-card 0%, var(--t3-a15) 50%, $bg-card 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+  }
+}
+
+.data-table-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 12px;
+
+  &__icon {
+    color: $text-muted;
+    opacity: 0.5;
+  }
+
+  &__msg {
+    color: $text-muted;
+    font-size: 0.875rem;
+    text-align: center;
+  }
+}
+
+// Responsive priority
+@media (max-width: calc($breakpoint-sm - 1px)) {
+  .priority-medium,
+  .priority-low {
+    display: none;
+  }
+}
+
+@media (max-width: calc($breakpoint-xs - 1px)) {
+  .priority-low {
+    display: none;
+  }
+}
