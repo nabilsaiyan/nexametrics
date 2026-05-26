@@ -1,0 +1,64 @@
+@use '../../styles/variables' as *;
+
+.slide-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 200;
+}
+
+.slide-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 420px;
+  background: $bg-surface;
+  border-left: 1px solid $border;
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  @media (max-width: calc($breakpoint-sm - 1px)) {
+    width: 100vw;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid $border;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: $text-primary;
+  }
+
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: $text-muted;
+    border-radius: 6px;
+    transition: $transition;
+
+    &:hover {
+      color: $text-primary;
+      background: var(--a-a08);
+    }
+  }
+
+  &__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+  }
+}
