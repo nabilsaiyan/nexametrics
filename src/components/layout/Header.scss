@@ -1,0 +1,442 @@
+@use '../../styles/variables' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: $header-height;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid $border;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  z-index: 90;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  &__hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: $text-secondary;
+    border-radius: 9px;
+    transition: $transition;
+
+    &:hover {
+      color: $text-primary;
+      background: rgba(124, 58, 237, 0.08);
+    }
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      display: flex;
+    }
+  }
+
+  &__title {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: $text-primary;
+    letter-spacing: -0.02em;
+  }
+
+  &__center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      display: none;
+    }
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: $bg-card;
+    border: 1px solid $border;
+    border-radius: $input-radius;
+    padding: 8px 12px;
+    width: 100%;
+    max-width: 400px;
+    color: $text-muted;
+    transition: $transition;
+    cursor: text;
+
+    &:hover,
+    &:focus {
+      border-color: rgba(124, 58, 237, 0.3);
+      outline: none;
+      background: $bg-card-hover;
+    }
+  }
+
+  &__search-icon {
+    color: $text-muted;
+    flex-shrink: 0;
+  }
+
+  &__search-placeholder {
+    flex: 1;
+    font-size: 0.85rem;
+    color: $text-muted;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__search-kbd {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.7rem;
+    color: $text-muted;
+    background: $bg-deep;
+    border: 1px solid $border;
+    border-radius: 4px;
+    padding: 2px 6px;
+    flex-shrink: 0;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  &__clock {
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $text-muted;
+    letter-spacing: 0.05em;
+    padding: 0 4px;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      display: none;
+    }
+  }
+
+  &__theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    color: $text-muted;
+    transition: $transition;
+
+    &:hover {
+      color: $accent-cyan;
+      background: var(--a-a08);
+    }
+  }
+
+  // ── Notifications ──────────────────────────────────────────────────────
+
+  &__notif-wrap {
+    position: relative;
+  }
+
+  &__bell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: $text-secondary;
+    border-radius: 9px;
+    transition: $transition;
+
+    &:hover,
+    &--open {
+      color: $text-primary;
+      background: rgba(124, 58, 237, 0.1);
+    }
+  }
+
+  &__bell-badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    min-width: 16px;
+    height: 16px;
+    background: $accent-red;
+    border-radius: 8px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+    border: 1.5px solid $bg-surface;
+  }
+
+  &__notif-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 340px;
+    background: $bg-card;
+    border: 1px solid $border;
+    border-radius: $card-radius;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(124, 58, 237, 0.1);
+    z-index: 200;
+    overflow: hidden;
+    animation: fadeIn 0.15s ease;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      right: -60px;
+      width: 300px;
+    }
+  }
+
+  &__notif-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid $border;
+  }
+
+  &__notif-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: $text-primary;
+      }
+
+  &__notif-mark-read {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $accent-purple;
+    transition: $transition;
+
+    &:hover {
+      color: $text-primary;
+    }
+  }
+
+  &__notif-list {
+    max-height: 360px;
+    overflow-y: auto;
+  }
+
+  &__notif-empty {
+    padding: 32px 16px;
+    text-align: center;
+    font-size: 0.875rem;
+    color: $text-muted;
+  }
+
+  &__notif-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid $border;
+    transition: $transition;
+    position: relative;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: rgba(124, 58, 237, 0.04);
+    }
+
+    &--read {
+      opacity: 0.55;
+    }
+
+    &:not(&--read)::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: $accent-cyan;
+    }
+  }
+
+  &__notif-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  &__notif-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__notif-item-title {
+    font-size: 0.8375rem;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: 2px;
+  }
+
+  &__notif-item-body {
+    font-size: 0.775rem;
+    color: $text-secondary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__notif-item-time {
+    font-size: 0.7rem;
+    color: $text-muted;
+    margin-top: 3px;
+    font-family: 'Inconsolata', monospace;
+  }
+
+  &__notif-dismiss {
+    color: $text-muted;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 2px 4px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: $transition;
+
+    &:hover {
+      color: $text-primary;
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  // ── Profile dropdown ───────────────────────────────────────────────────
+
+  &__profile-wrap {
+    position: relative;
+  }
+
+  &__user-menu {
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    transition: $transition;
+
+    &:hover,
+    &--open {
+      .header__avatar {
+        border-color: $accent-cyan;
+        box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+      }
+    }
+  }
+
+  &__avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid rgba(124, 58, 237, 0.3);
+    background: $bg-card;
+    transition: $transition;
+    display: block;
+  }
+
+  &__profile-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 220px;
+    background: $bg-card;
+    border: 1px solid $border;
+    border-radius: $card-radius;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(124, 58, 237, 0.1);
+    z-index: 200;
+    overflow: hidden;
+    animation: fadeIn 0.15s ease;
+  }
+
+  &__profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+
+  &__profile-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid rgba(124, 58, 237, 0.3);
+    flex-shrink: 0;
+  }
+
+  &__profile-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  &__profile-email {
+    font-size: 0.725rem;
+    color: $text-muted;
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__profile-divider {
+    height: 1px;
+    background: $border;
+    margin: 0;
+  }
+
+  &__profile-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 0.875rem;
+    color: $text-secondary;
+    transition: $transition;
+    text-align: left;
+
+    &:hover {
+      background: rgba(124, 58, 237, 0.06);
+      color: $text-primary;
+    }
+
+    &--danger {
+      color: $accent-red;
+
+      &:hover {
+        background: rgba(248, 113, 113, 0.08);
+        color: $accent-red;
+      }
+    }
+  }
+}
