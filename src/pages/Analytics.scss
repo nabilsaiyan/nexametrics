@@ -1,0 +1,108 @@
+@use '../styles/variables' as *;
+
+.analytics {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__card {
+    background: $bg-card;
+    border-radius: $card-radius;
+    border: 1px solid $border;
+    box-shadow: $card-shadow;
+    padding: 20px;
+
+    &--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__card-title {
+        font-size: 0.9375rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  &__grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+
+    @media (max-width: calc($breakpoint-lg - 1px)) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__grid-funnel {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 16px;
+
+    @media (max-width: calc($breakpoint-lg - 1px)) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__grid-pm-country {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__funnel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 8px;
+  }
+
+  &__funnel-step {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__funnel-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 36px;
+    padding: 0 12px;
+    background: linear-gradient(90deg, var(--a-a15) 0%, var(--as-a15) 100%);
+    border: 1px solid var(--a-a15);
+    border-radius: 4px;
+    transition: width 0.8s ease;
+  }
+
+  &__funnel-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  &__funnel-pct {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: $accent-cyan;
+  }
+
+  &__funnel-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 4px;
+
+    .number {
+      font-size: 0.75rem;
+      color: $text-secondary;
+    }
+  }
+
+  &__funnel-drop {
+    font-size: 0.6875rem;
+    color: $accent-red;
+    font-weight: 500;
+  }
+}
