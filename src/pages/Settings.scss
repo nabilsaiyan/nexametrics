@@ -1,0 +1,341 @@
+@use '../styles/variables' as *;
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 760px;
+
+  // ── Section ────────────────────────────────────────────────────────────────
+  &__section {
+    background: $bg-card;
+    border: 1px solid $border;
+    border-radius: $card-radius;
+    box-shadow: $card-shadow;
+    overflow: hidden;
+  }
+
+  &__section-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 20px 14px;
+    border-bottom: 1px solid $border;
+  }
+
+  &__section-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--a-a10);
+    border: 1px solid var(--a-a20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $accent-purple;
+    flex-shrink: 0;
+  }
+
+  &__section-title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: $text-primary;
+    letter-spacing: -0.01em;
+  }
+
+  &__section-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // ── Row ────────────────────────────────────────────────────────────────────
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 20px;
+    border-bottom: 1px solid $border;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+
+  &__row-label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $text-primary;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__row-hint {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: $text-muted;
+  }
+
+  &__row-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      width: 100%;
+    }
+  }
+
+  // ── Input ──────────────────────────────────────────────────────────────────
+  &__input {
+    background: $bg-card-hover;
+    border: 1px solid $border;
+    border-radius: $input-radius;
+    padding: 8px 12px;
+    font-size: 0.875rem;
+    color: $text-primary;
+    font-family: inherit;
+    width: 240px;
+    transition: $transition;
+
+    &:focus {
+      outline: none;
+      border-color: $border-hover;
+      background: $bg-card;
+    }
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      width: 100%;
+    }
+  }
+
+  // ── Actions ────────────────────────────────────────────────────────────────
+  &__actions {
+    padding: 14px 20px;
+    border-top: 1px solid $border;
+  }
+
+  // ── Buttons ────────────────────────────────────────────────────────────────
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: $transition;
+    white-space: nowrap;
+
+    &--primary {
+      background: $accent-cyan;
+      color: #fff;
+      border: 1px solid $accent-cyan;
+
+      &:hover {
+        background: $accent-purple;
+        border-color: $accent-purple;
+      }
+    }
+
+    &--ghost {
+      background: $bg-card-hover;
+      color: $text-secondary;
+      border: 1px solid $border;
+
+      &:hover {
+        border-color: $border-hover;
+        color: $text-primary;
+      }
+    }
+
+    &--danger {
+      background: var(--r-a08);
+      color: $accent-red;
+      border: 1px solid var(--r-a12);
+
+      &:hover {
+        background: var(--r-a12);
+      }
+    }
+  }
+
+  // ── Toggle ─────────────────────────────────────────────────────────────────
+  &__toggle {
+    width: 40px;
+    height: 22px;
+    border-radius: 11px;
+    background: var(--t3-a15);
+    border: 1px solid $border;
+    position: relative;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+
+    &--on {
+      background: $accent-cyan;
+      border-color: $accent-cyan;
+    }
+  }
+
+  &__toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.2s ease;
+
+    .settings__toggle--on & {
+      transform: translateX(18px);
+    }
+  }
+
+  // ── Theme buttons ─────────────────────────────────────────────────────────
+  &__theme-btns {
+    display: flex;
+    gap: 6px;
+  }
+
+  &__theme-btn {
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    font-family: inherit;
+    background: $bg-card-hover;
+    color: $text-secondary;
+    border: 1px solid $border;
+    transition: $transition;
+
+    &:hover {
+      border-color: $border-hover;
+      color: $text-primary;
+    }
+
+    &--active {
+      background: var(--a-a12);
+      border-color: var(--a-a25);
+      color: $accent-purple;
+    }
+  }
+
+  // ── Select ─────────────────────────────────────────────────────────────────
+  &__select-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      width: 100%;
+    }
+  }
+
+  &__select {
+    appearance: none;
+    background: $bg-card-hover;
+    border: 1px solid $border;
+    border-radius: $input-radius;
+    padding: 8px 36px 8px 12px;
+    font-size: 0.875rem;
+    color: $text-primary;
+    font-family: inherit;
+    width: 240px;
+    transition: $transition;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border-color: $border-hover;
+    }
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      width: 100%;
+    }
+  }
+
+  &__select-chevron {
+    position: absolute;
+    right: 10px;
+    color: $text-muted;
+    pointer-events: none;
+  }
+
+  // ── Integrations ──────────────────────────────────────────────────────────
+  &__integrations {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__integration {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-bottom: 1px solid $border;
+    transition: $transition;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: var(--a-a03);
+    }
+
+    &--connected {
+      .settings__integration-name::after {
+        content: '●';
+        color: $accent-green;
+        font-size: 0.5rem;
+        margin-left: 6px;
+        vertical-align: middle;
+      }
+    }
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__integration-logo {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $bg-card-hover;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  &__integration-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__integration-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: 2px;
+  }
+
+  &__integration-desc {
+    font-size: 0.75rem;
+    color: $text-muted;
+  }
+}
