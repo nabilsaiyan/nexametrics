@@ -25,7 +25,9 @@
 
   &--collapsed {
     width: $sidebar-collapsed-width;
+  }
 
+  &--collapsed:not(.sidebar--mobile-open) {
     .sidebar__header {
       padding: 0;
       justify-content: center;
