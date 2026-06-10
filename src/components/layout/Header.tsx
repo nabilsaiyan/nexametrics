@@ -51,7 +51,7 @@ function notifColor(type: Notification['type']) {
 }
 
 export function Header() {
-  const { openMobile } = useSidebar()
+  const { openMobile, collapsed } = useSidebar()
   const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
@@ -116,7 +116,7 @@ export function Header() {
 
   return (
     <>
-      <header className="header">
+      <header className={`header ${collapsed ? 'header--collapsed' : ''}`}>
         <div className="header__left">
           <button className="header__hamburger" onClick={openMobile} aria-label="Open navigation menu">
             <Menu size={20} />

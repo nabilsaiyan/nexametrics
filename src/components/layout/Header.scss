@@ -4,8 +4,17 @@
   position: fixed;
   top: 0;
   right: 0;
-  left: 0;
+  left: $sidebar-width;
   height: $header-height;
+  transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &--collapsed {
+    left: $sidebar-collapsed-width;
+  }
+
+  @media (max-width: calc($breakpoint-sm - 1px)) {
+    left: 0;
+  }
   background: var(--header-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);

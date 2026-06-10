@@ -25,6 +25,20 @@
 
   &--collapsed {
     width: $sidebar-collapsed-width;
+
+    .sidebar__header {
+      padding: 0;
+      justify-content: center;
+    }
+
+    .sidebar__logo {
+      justify-content: center;
+    }
+
+    .sidebar__collapse-btn {
+      position: absolute;
+      right: 6px;
+    }
   }
 
   @media (max-width: calc($breakpoint-sm - 1px)) {
@@ -49,6 +63,7 @@
     height: $header-height;
     border-bottom: 1px solid $border;
     flex-shrink: 0;
+    position: relative;
   }
 
   &__logo {
