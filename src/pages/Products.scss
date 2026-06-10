@@ -95,19 +95,35 @@
     flex-wrap: wrap;
   }
 
+  &__sort-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
   &__sort-select {
-    background: $bg-deep;
+    appearance: none;
+    -webkit-appearance: none;
+    background: $bg-card;
     border: 1px solid $border;
     border-radius: $input-radius;
     color: $text-secondary;
-    padding: 6px 10px;
+    padding: 7px 30px 7px 12px;
     font-size: 0.8125rem;
-    font-family: 'Inter', sans-serif;
+    font-family: inherit;
     outline: none;
     cursor: pointer;
     transition: $transition;
 
     &:focus { border-color: $border-hover; }
+    &:hover { border-color: $border-hover; color: $text-primary; }
+  }
+
+  &__sort-chevron {
+    position: absolute;
+    right: 9px;
+    color: $text-muted;
+    pointer-events: none;
   }
 
   &__search-wrap {

@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
-import { LayoutGrid, List, X, Star, TrendingUp, TrendingDown, Minus, Search } from 'lucide-react'
+import { LayoutGrid, List, X, Star, TrendingUp, TrendingDown, Minus, Search, ChevronDown } from 'lucide-react'
 import type { Product } from '../data/types'
 import { Badge } from '../components/ui/Badge'
 import { DataTable, type Column } from '../components/ui/DataTable'
@@ -141,14 +141,17 @@ export function Products() {
         </div>
         <div className="products__controls">
           <label htmlFor="products-sort" className="sr-only">Sort products</label>
-          <select id="products-sort" className="products__sort-select" value={sort} onChange={(e) => setSort(e.target.value as SortKey)}>
-            <option value="revenue-desc">Revenue ↓</option>
-            <option value="revenue-asc">Revenue ↑</option>
-            <option value="price-desc">Price ↓</option>
-            <option value="price-asc">Price ↑</option>
-            <option value="rating-desc">Rating ↓</option>
-            <option value="stock-desc">Stock ↓</option>
-          </select>
+          <div className="products__sort-wrap">
+            <select id="products-sort" className="products__sort-select" value={sort} onChange={(e) => setSort(e.target.value as SortKey)}>
+              <option value="revenue-desc">Revenue ↓</option>
+              <option value="revenue-asc">Revenue ↑</option>
+              <option value="price-desc">Price ↓</option>
+              <option value="price-asc">Price ↑</option>
+              <option value="rating-desc">Rating ↓</option>
+              <option value="stock-desc">Stock ↓</option>
+            </select>
+            <ChevronDown size={13} className="products__sort-chevron" aria-hidden="true" />
+          </div>
           <div className="products__search-wrap">
             <Search size={13} className="products__search-icon" aria-hidden="true" />
             <label htmlFor="products-search" className="sr-only">Search products</label>
