@@ -48,6 +48,11 @@
     box-shadow: $card-shadow;
     border: 1px solid $border;
     padding: 20px;
+    min-width: 0;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      padding: 14px 12px;
+    }
   }
 
   &__chart-header {

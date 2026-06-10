@@ -65,13 +65,8 @@
       &:hover {
         background: var(--a-a03);
 
-        .data-table__td {
-          transform: none;
-          border-left: none;
-        }
-
         td:first-child {
-          border-left: 2px solid var(--a-a40);
+          box-shadow: inset 2px 0 0 var(--a-a40);
         }
       }
     }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Check, Zap, Crown, Building2, ChevronRight, CreditCard, Calendar, Shield } from 'lucide-react'
+import { Check, Zap, Crown, Building2, ChevronRight, CreditCard, Calendar, Shield, Download } from 'lucide-react'
 import toast from 'react-hot-toast'
 import './Profile.scss'
 
@@ -272,8 +272,10 @@ export function Profile() {
                     <button
                       className="profile__invoice-download"
                       onClick={() => toast(`Downloading ${row.invoice}…`, { icon: '📄' })}
+                      title={`Download ${row.invoice}`}
+                      aria-label={`Download ${row.invoice}`}
                     >
-                      Download
+                      <Download size={14} />
                     </button>
                   </td>
                 </tr>

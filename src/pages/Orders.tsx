@@ -1,12 +1,13 @@
-import { useState, useMemo, useCallback, useEffect } from 'react'
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import { format, subDays, startOfDay, endOfDay } from 'date-fns'
-import { Eye, Download, InboxIcon, Search } from 'lucide-react'
+import { Eye, Download, InboxIcon, Search, ChevronDown } from 'lucide-react'
 import toast from 'react-hot-toast'
 import type { Order, OrderStatus, PaymentMethod } from '../data/types'
 import { DataTable, type Column } from '../components/ui/DataTable'
 import { Badge } from '../components/ui/Badge'
 import { Avatar } from '../components/ui/Avatar'
 import { SlidePanel } from '../components/ui/SlidePanel'
+import { useSearchParams } from 'react-router-dom'
 import { useDebounce } from '../hooks/useDebounce'
 import { useApi } from '../hooks/useApi'
 import './Orders.scss'
@@ -23,7 +24,7 @@ const PM_LABELS: Record<PaymentMethod, string> = {
   card: 'Card', paypal: 'PayPal', crypto: 'Crypto', bank: 'Bank',
 }
 
-type DatePreset = 'today' | '7d' | '30d' | '90d' | 'custom'
+type DatePreset = 'today' | '7d' | '30d' | '90d' | 'all' | 'custom'
 const PAGE_SIZE = 20
 
 interface OrdersResponse {
@@ -108,14 +109,16 @@ function OrderDetailPanel({ order, onClose }: { order: Order; onClose: () => voi
 }
 
 export function Orders() {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [statusFilter, setStatusFilter] = useState<OrderStatus | 'all'>('all')
-  const [datePreset, setDatePreset] = useState<DatePreset>('30d')
+  const [datePreset, setDatePreset] = useState<DatePreset>(() => searchParams.get('orderId') ? 'all' : '30d')
   const [customFrom, setCustomFrom] = useState('')
   const [customTo, setCustomTo] = useState('')
   const [pmFilter, setPmFilter] = useState<PaymentMethod | 'all'>('all')
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(() => searchParams.get('orderId') ?? '')
   const [page, setPage] = useState(1)
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
+  const autoOpenId = useRef<string | null>(searchParams.get('orderId'))
 
   const debouncedSearch = useDebounce(search, 300)
 
@@ -148,6 +151,16 @@ export function Orders() {
   const orders = ordersRes?.data ?? []
   const totalPages = Math.max(1, Math.ceil((ordersRes?.total ?? 0) / PAGE_SIZE))
 
+  useEffect(() => {
+    if (!autoOpenId.current || selectedOrder) return
+    const target = orders.find((o) => o.id.toLowerCase() === autoOpenId.current!.toLowerCase())
+    if (target) {
+      setSelectedOrder(target)
+      autoOpenId.current = null
+      setSearchParams({}, { replace: true })
+    }
+  }, [orders, selectedOrder, setSearchParams])
+
   const handleExport = useCallback(() => {
     toast.loading('Preparing export…')
     setTimeout(() => { toast.dismiss(); toast.success('Download ready') }, 1500)
@@ -158,7 +171,7 @@ export function Orders() {
   }, [])
 
   const columns = useMemo<Column<Order>[]>(() => [
-    { key: 'num', label: '#', render: (_, i) => <span className="number" style={{ color: 'var(--t3)' }}>{(page - 1) * PAGE_SIZE + i + 1}</span>, priority: 'low' },
+    { key: 'num', label: '#', render: (o) => { const pos = orders.indexOf(o); return <span className="number" style={{ color: 'var(--t3)' }}>{(page - 1) * PAGE_SIZE + pos + 1}</span> }, priority: 'low' },
     { key: 'id', label: 'Order ID', render: (o) => <span className="number orders__order-id">{o.id}</span> },
     { key: 'customer', label: 'Customer', render: (o) => (<div className="orders__customer-cell"><Avatar src={o.customer.avatar} alt={o.customer.name} size={28} /><span style={{ color: 'var(--t1)', fontWeight: 500 }}>{o.customer.name}</span></div>) },
     { key: 'items', label: 'Items', render: (o) => <span className="number" style={{ color: 'var(--t2)' }}>{o.items.length}</span>, priority: 'low' },
@@ -167,7 +180,7 @@ export function Orders() {
     { key: 'payment', label: 'Payment', render: (o) => <span style={{ color: 'var(--t2)', fontSize: '0.8125rem' }}>{PM_LABELS[o.paymentMethod]}</span>, priority: 'medium' },
     { key: 'date', label: 'Date', render: (o) => <span className="number" style={{ color: 'var(--t2)', fontSize: '0.75rem' }}>{format(new Date(o.date), 'MMM dd, yyyy')}</span>, sortable: true, priority: 'medium' },
     { key: 'actions', label: '', render: (o) => (<button className="orders__eye-btn" onClick={(e) => { e.stopPropagation(); setSelectedOrder(o) }} aria-label={`View order ${o.id}`}><Eye size={14} /></button>), priority: 'low' },
-  ], [page])
+  ], [page, orders])
 
   const pageNums = useMemo(() => {
     if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -208,10 +221,13 @@ export function Orders() {
             </div>
           )}
           <label htmlFor="pm-filter" className="sr-only">Payment method</label>
-          <select id="pm-filter" className="orders__select" value={pmFilter} onChange={(e) => handleFilterChange(setPmFilter)(e.target.value as PaymentMethod | 'all')}>
-            <option value="all">All payments</option>
-            {(['card', 'paypal', 'crypto', 'bank'] as PaymentMethod[]).map((m) => <option key={m} value={m}>{PM_LABELS[m]}</option>)}
-          </select>
+          <div className="orders__select-wrap">
+            <select id="pm-filter" className="orders__select" value={pmFilter} onChange={(e) => handleFilterChange(setPmFilter)(e.target.value as PaymentMethod | 'all')}>
+              <option value="all">All payments</option>
+              {(['card', 'paypal', 'crypto', 'bank'] as PaymentMethod[]).map((m) => <option key={m} value={m}>{PM_LABELS[m]}</option>)}
+            </select>
+            <ChevronDown size={13} className="orders__select-chevron" aria-hidden="true" />
+          </div>
           <div className="orders__search-wrap">
             <Search size={13} className="orders__search-icon" aria-hidden="true" />
             <label htmlFor="orders-search" className="sr-only">Search orders</label>
@@ -222,7 +238,7 @@ export function Orders() {
       </div>
 
       <div className="orders__table-card">
-        <DataTable columns={columns} data={orders} keyExtractor={(o) => o.id} onRowClick={setSelectedOrder} emptyIcon={<InboxIcon size={40} />} emptyMessage="No orders match your filters" loading={loading} skeletonRows={5} />
+        <DataTable key={debouncedSearch} columns={columns} data={orders} keyExtractor={(o) => o.id} onRowClick={setSelectedOrder} emptyIcon={<InboxIcon size={40} />} emptyMessage="No orders match your filters" loading={loading} skeletonRows={5} />
         {!loading && (ordersRes?.total ?? 0) > 0 && (
           <div className="orders__pagination" aria-label="Pagination">
             <button className="orders__page-btn" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1} aria-label="Previous page">‹</button>

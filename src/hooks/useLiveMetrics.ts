@@ -5,17 +5,19 @@ export function useLiveMetrics(initialStats: CurrentMonthStats, initialOrders: O
   const [liveOrders, setLiveOrders] = useState<Order[]>(initialOrders)
   const [stats, setStats] = useState<CurrentMonthStats>(initialStats)
   const [newOrderId, setNewOrderId] = useState<string | null>(null)
-  const seeded = useRef(false)
+  const ordersSeeded = useRef(false)
+  const statsSeeded = useRef(false)
 
   useEffect(() => {
-    if (!seeded.current && initialOrders.length > 0) {
-      seeded.current = true
+    if (!ordersSeeded.current && initialOrders.length > 0) {
+      ordersSeeded.current = true
       setLiveOrders(initialOrders)
     }
   }, [initialOrders])
 
   useEffect(() => {
-    if (initialStats.orders > 0 && !seeded.current) {
+    if (!statsSeeded.current && initialStats.orders > 0) {
+      statsSeeded.current = true
       setStats(initialStats)
     }
   }, [initialStats])

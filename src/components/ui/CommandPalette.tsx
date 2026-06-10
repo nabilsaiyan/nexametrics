@@ -21,13 +21,13 @@ interface CommandItem {
 }
 
 function toOrderItem(o: Order): CommandItem {
-  return { id: o.id, label: o.id, sublabel: `${o.customer.name} · $${o.total.toFixed(2)}`, type: 'order', path: '/orders' }
+  return { id: o.id, label: o.id, sublabel: `${o.customer.name} · $${o.total.toFixed(2)}`, type: 'order', path: `/orders?orderId=${encodeURIComponent(o.id)}` }
 }
 function toCustomerItem(c: Customer): CommandItem {
-  return { id: c.id, label: c.name, sublabel: c.email, type: 'customer', path: '/customers' }
+  return { id: c.id, label: c.name, sublabel: c.email, type: 'customer', path: `/customers?q=${encodeURIComponent(c.name)}` }
 }
 function toProductItem(p: Product): CommandItem {
-  return { id: p.id, label: p.name, sublabel: `${p.category} · $${p.price}`, type: 'product', path: '/products' }
+  return { id: p.id, label: p.name, sublabel: `${p.category} · $${p.price}`, type: 'product', path: `/products?q=${encodeURIComponent(p.name)}` }
 }
 
 export function CommandPalette({ isOpen, onClose, searchValue, onSearchChange }: CommandPaletteProps) {

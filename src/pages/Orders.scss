@@ -28,6 +28,10 @@
     position: sticky;
     top: calc($header-height + 20px);
     z-index: 10;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      position: static;
+    }
   }
 
   &__status-tabs {
@@ -122,21 +126,35 @@
     }
   }
 
+  &__select-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
   &__select {
+    appearance: none;
+    -webkit-appearance: none;
     background: $bg-deep;
     border: 1px solid $border;
     border-radius: $input-radius;
     color: $text-secondary;
-    padding: 6px 10px;
+    padding: 6px 28px 6px 10px;
     font-size: 0.8125rem;
-    font-family: 'Inter', sans-serif;
+    font-family: inherit;
     outline: none;
     cursor: pointer;
     transition: $transition;
 
-    &:focus {
-      border-color: $border-hover;
-    }
+    &:focus { border-color: $border-hover; }
+    &:hover { border-color: $border-hover; color: $text-primary; }
+  }
+
+  &__select-chevron {
+    position: absolute;
+    right: 8px;
+    color: $text-muted;
+    pointer-events: none;
   }
 
   &__search-wrap {

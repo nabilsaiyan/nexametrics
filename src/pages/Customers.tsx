@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Users, Eye, Search } from 'lucide-react'
 import { format } from 'date-fns'
 import {
@@ -97,8 +98,9 @@ function CustomerDetailPanel({ customer, onClose }: { customer: Customer; onClos
 }
 
 export function Customers() {
+  const [searchParams] = useSearchParams()
   const [segment, setSegment] = useState<CustomerSegment | 'all'>('all')
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(() => searchParams.get('q') ?? '')
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
 
   const debouncedSearch = useDebounce(search, 300)
@@ -146,19 +148,19 @@ export function Customers() {
       key: 'customer', label: 'Customer', render: (c) => (
         <div className="customers__customer-cell">
           <Avatar src={c.avatar} alt={c.name} size={32} />
-          <div>
+          <div className="customers__customer-info">
             <div style={{ color: 'var(--t1)', fontWeight: 500 }}>{c.name}</div>
             <div style={{ color: 'var(--t3)', fontSize: '0.75rem' }}>{c.email}</div>
           </div>
         </div>
       ),
     },
-    { key: 'country', label: 'Country', render: (c) => <span style={{ color: '#7d8aa8' }}>{c.country}</span>, priority: 'medium' },
-    { key: 'orders', label: 'Orders', render: (c) => <span className="number" style={{ color: '#7d8aa8' }}>{c.totalOrders}</span>, sortable: true, priority: 'medium' },
-    { key: 'spent', label: 'Total Spent', render: (c) => <span className="number" style={{ color: '#eef0f8', fontWeight: 600 }}>${c.totalSpent.toFixed(2)}</span>, sortable: true },
+    { key: 'country', label: 'Country', render: (c) => <span style={{ color: 'var(--t2)' }}>{c.country}</span>, priority: 'medium' },
+    { key: 'orders', label: 'Orders', render: (c) => <span className="number" style={{ color: 'var(--t2)' }}>{c.totalOrders}</span>, sortable: true, sortValue: (c) => c.totalOrders, priority: 'medium' },
+    { key: 'spent', label: 'Total Spent', render: (c) => <span className="number" style={{ color: 'var(--t1)', fontWeight: 600 }}>${c.totalSpent.toFixed(2)}</span>, sortable: true, sortValue: (c) => c.totalSpent, priority: 'medium' },
     { key: 'status', label: 'Status', render: (c) => { const s = STATUS_CONFIG[c.status]; return <Badge variant={s.variant} pulse={c.status === 'vip'}>{s.label}</Badge> } },
     { key: 'segment', label: 'Segment', render: (c) => { const s = SEGMENT_CONFIG[c.segment]; return <Badge variant={s.variant}>{s.label}</Badge> }, priority: 'medium' },
-    { key: 'joined', label: 'Joined', render: (c) => <span className="number" style={{ color: '#3e4a66', fontSize: '0.75rem' }}>{format(new Date(c.joinedDate), 'MMM dd, yyyy')}</span>, sortable: true, priority: 'low' },
+    { key: 'joined', label: 'Joined', render: (c) => <span className="number" style={{ color: 'var(--t3)', fontSize: '0.75rem' }}>{format(new Date(c.joinedDate), 'MMM dd, yyyy')}</span>, sortable: true, sortValue: (c) => c.joinedDate, priority: 'low' },
     { key: 'actions', label: '', render: (c) => (<button className="customers__eye-btn" onClick={(e) => { e.stopPropagation(); setSelectedCustomer(c) }} aria-label={`View ${c.name}`}><Eye size={14} /></button>), priority: 'low' },
   ], [])
 

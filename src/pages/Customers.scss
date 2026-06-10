@@ -55,6 +55,12 @@
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
   }
 
   &__segment-tabs {
@@ -99,6 +105,12 @@
     position: relative;
     min-width: 220px;
     max-width: 300px;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+    }
   }
 
   &__search-icon {
@@ -132,12 +144,24 @@
     border: 1px solid $border;
     box-shadow: $card-shadow;
     overflow: hidden;
+    min-width: 0;
   }
 
   &__customer-cell {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 0;
+  }
+
+  &__customer-info {
+    min-width: 0;
+
+    > div {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   &__eye-btn {

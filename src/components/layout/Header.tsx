@@ -107,7 +107,7 @@ export function Header() {
   const handleProfileAction = useCallback((action: string) => {
     setProfileOpen(false)
     if (action === 'profile') { navigate('/profile') }
-    else if (action === 'settings') { toast('Opening settings…', { icon: '⚙️' }) }
+    else if (action === 'settings') { navigate('/settings') }
     else if (action === 'signout') {
       toast.success('Signed out successfully')
       setTimeout(() => navigate('/'), 800)
@@ -132,6 +132,9 @@ export function Header() {
         </div>
 
         <div className="header__right">
+          <button className="header__search-mobile" onClick={() => setCommandOpen(true)} aria-label="Search">
+            <Search size={18} />
+          </button>
           <span className="header__clock" aria-label="Current time">{clock}</span>
 
           <button

@@ -191,12 +191,12 @@ export function Dashboard() {
   const loading = statsLoading || ordersLoading
 
   const orderColumns = useMemo<Column<Order>[]>(() => [
-    { key: 'id', label: 'Order ID', render: (o) => <span className="number" style={{ color: 'var(--t2)', fontSize: '0.8125rem' }}>{o.id}</span> },
+    { key: 'id', label: 'Order ID', render: (o) => <span className="number" style={{ color: 'var(--t2)', fontSize: '0.8125rem' }}>{o.id}</span>, priority: 'medium' as const },
     {
       key: 'customer', label: 'Customer', render: (o) => (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
           <Avatar src={o.customer.avatar} alt={o.customer.name} size={24} />
-          <span style={{ color: 'var(--t1)', fontWeight: 500, fontSize: '0.8125rem' }}>{o.customer.name}</span>
+          <span style={{ color: 'var(--t1)', fontWeight: 500, fontSize: '0.8125rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{o.customer.name}</span>
         </div>
       ),
     },

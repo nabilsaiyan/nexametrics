@@ -84,6 +84,7 @@ export function Layout() {
       <BottomNav />
       <Toaster
         position="top-right"
+        containerStyle={{ top: 70 }}
         toastOptions={{
           style: {
             background: 'var(--toast-bg)',

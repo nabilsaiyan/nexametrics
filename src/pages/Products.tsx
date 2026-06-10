@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { LayoutGrid, List, X, Star, TrendingUp, TrendingDown, Minus, Search, ChevronDown } from 'lucide-react'
 import type { Product } from '../data/types'
 import { Badge } from '../components/ui/Badge'
@@ -78,9 +79,10 @@ function ProductCard({ product }: { product: Product }) {
 }
 
 export function Products() {
+  const [searchParams] = useSearchParams()
   const [category, setCategory] = useState('All')
   const [sort, setSort] = useState<SortKey>('revenue-desc')
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(() => searchParams.get('q') ?? '')
   const [view, setView] = useState<ViewMode>(() => (localStorage.getItem('products-view') as ViewMode) ?? 'grid')
   const [dismissedLowStock, setDismissedLowStock] = useState(false)
 

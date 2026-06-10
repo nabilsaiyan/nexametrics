@@ -22,7 +22,8 @@
 
     @media (max-width: calc($breakpoint-sm - 1px)) {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      text-align: center;
       gap: 16px;
     }
   }
@@ -73,6 +74,10 @@
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      justify-content: center;
+    }
   }
 
   &__badge {
@@ -136,6 +141,11 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+
+    @media (max-width: calc($breakpoint-sm - 1px)) {
+      align-items: center;
+      text-align: center;
+    }
   }
 
   &__section-title {
@@ -451,6 +461,11 @@
       padding: 10px 20px;
       font-size: 0.8125rem;
       text-align: left;
+
+      &:last-child {
+        padding-right: 12px;
+        width: 40px;
+      }
     }
 
     th {
@@ -487,13 +502,18 @@
   }
 
   &__invoice-download {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: $accent-purple;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    color: $text-muted;
     transition: $transition;
 
     &:hover {
-      color: $text-primary;
+      color: $accent-purple;
+      background: var(--a-a08);
     }
   }
 }

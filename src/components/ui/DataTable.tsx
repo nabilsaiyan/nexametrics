@@ -1,4 +1,4 @@
-import { type ReactNode, useState, useCallback } from 'react'
+import { type ReactNode, useState, useCallback, useMemo } from 'react'
 import { ChevronUp, ChevronDown } from 'lucide-react'
 import './DataTable.scss'
 
@@ -6,6 +6,7 @@ export interface Column<T> {
   key: string
   label: string
   sortable?: boolean
+  sortValue?: (row: T) => string | number
   render: (row: T, index: number) => ReactNode
   priority?: 'high' | 'medium' | 'low'
 }
@@ -39,15 +40,28 @@ export function DataTable<T>({
   const [sortDir, setSortDir] = useState<SortDir>('asc')
 
   const handleSort = useCallback((key: string) => {
-    setSortKey((prev) => {
-      if (prev === key) {
-        setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))
-      } else {
-        setSortDir('asc')
+    if (sortKey === key) {
+      setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))
+    } else {
+      setSortKey(key)
+      setSortDir('asc')
+    }
+  }, [sortKey])
+
+  const sortedData = useMemo(() => {
+    if (!sortKey) return data
+    const col = columns.find((c) => c.key === sortKey)
+    return [...data].sort((a, b) => {
+      const aVal = col?.sortValue ? col.sortValue(a) : (a as Record<string, unknown>)[sortKey]
+      const bVal = col?.sortValue ? col.sortValue(b) : (b as Record<string, unknown>)[sortKey]
+      if (aVal == null) return 1
+      if (bVal == null) return -1
+      if (typeof aVal === 'string' && typeof bVal === 'string') {
+        return sortDir === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal)
       }
-      return key
+      return sortDir === 'asc' ? (aVal as number) - (bVal as number) : (bVal as number) - (aVal as number)
     })
-  }, [])
+  }, [data, sortKey, sortDir, columns])
 
   if (loading) {
     return (
@@ -127,7 +141,7 @@ export function DataTable<T>({
           </tr>
         </thead>
         <tbody>
-          {data.map((row, index) => {
+          {sortedData.map((row, index) => {
             const id = keyExtractor(row)
             const isNew = newRowId === id
             return (
