@@ -208,6 +208,9 @@
     z-index: 200;
     overflow: hidden;
     animation: fadeIn 0.15s ease;
+    -webkit-animation: fadeIn 0.15s ease;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 
     @media (max-width: calc($breakpoint-sm - 1px)) {
       right: -60px;
@@ -385,6 +388,9 @@
     z-index: 200;
     overflow: hidden;
     animation: fadeIn 0.15s ease;
+    -webkit-animation: fadeIn 0.15s ease;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   &__profile-info {
