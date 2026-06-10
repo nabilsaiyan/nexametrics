@@ -2,13 +2,8 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "functions": {
-    "server/index.ts": {
-      "includeFiles": "src/data/**"
-    }
-  },
   "routes": [
-    { "src": "/api/(.*)", "dest": "/server/index.ts" },
+    { "src": "/api/(.*)", "dest": "/api/index.ts" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
