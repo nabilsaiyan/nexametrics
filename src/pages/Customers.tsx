@@ -160,7 +160,7 @@ export function Customers() {
     { key: 'spent', label: 'Total Spent', render: (c) => <span className="number" style={{ color: 'var(--t1)', fontWeight: 600 }}>${c.totalSpent.toFixed(2)}</span>, sortable: true, sortValue: (c) => c.totalSpent, priority: 'medium' },
     { key: 'status', label: 'Status', render: (c) => { const s = STATUS_CONFIG[c.status]; return <Badge variant={s.variant} pulse={c.status === 'vip'}>{s.label}</Badge> } },
     { key: 'segment', label: 'Segment', render: (c) => { const s = SEGMENT_CONFIG[c.segment]; return <Badge variant={s.variant}>{s.label}</Badge> }, priority: 'medium' },
-    { key: 'joined', label: 'Joined', render: (c) => <span className="number" style={{ color: 'var(--t3)', fontSize: '0.75rem' }}>{format(new Date(c.joinedDate), 'MMM dd, yyyy')}</span>, sortable: true, sortValue: (c) => c.joinedDate, priority: 'low' },
+    { key: 'joined', label: 'Joined', render: (c) => <span className="number" style={{ color: 'var(--t3)', fontSize: '0.75rem' }}>{format(new Date(c.joinedDate), 'MMM dd, yyyy')}</span>, sortable: true, sortValue: (c) => new Date(c.joinedDate).getTime(), priority: 'low' },
     { key: 'actions', label: '', render: (c) => (<button className="customers__eye-btn" onClick={(e) => { e.stopPropagation(); setSelectedCustomer(c) }} aria-label={`View ${c.name}`}><Eye size={14} /></button>), priority: 'low' },
   ], [])
 
