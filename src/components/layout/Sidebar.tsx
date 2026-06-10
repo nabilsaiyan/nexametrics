@@ -60,21 +60,13 @@ export function Sidebar() {
             </div>
             {(!collapsed || mobileOpen) && <span className="sidebar__logo-text">NexaMetrics</span>}
           </Link>
-          {mobileOpen ? (
+          {mobileOpen && (
             <button
               className="sidebar__close-btn"
               onClick={closeMobile}
               aria-label="Close navigation menu"
             >
               <X size={18} />
-            </button>
-          ) : (
-            <button
-              className="sidebar__collapse-btn"
-              onClick={toggleCollapsed}
-              aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            >
-              <ChevronLeft size={16} className={`sidebar__collapse-icon ${collapsed ? 'sidebar__collapse-icon--rotated' : ''}`} />
             </button>
           )}
         </div>
@@ -99,6 +91,17 @@ export function Sidebar() {
             )
           })}
         </nav>
+
+        {!mobileOpen && (
+          <button
+            className="sidebar__toggle"
+            onClick={toggleCollapsed}
+            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            <ChevronLeft size={15} className={`sidebar__collapse-icon ${collapsed ? 'sidebar__collapse-icon--rotated' : ''}`} />
+            {!collapsed && <span className="sidebar__toggle-label">Collapse</span>}
+          </button>
+        )}
 
         <div className="sidebar__footer">
           <Link to="/profile" className="sidebar__user" onClick={mobileOpen ? closeMobile : undefined} aria-label="My profile">

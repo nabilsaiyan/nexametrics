@@ -35,9 +35,8 @@
       justify-content: center;
     }
 
-    .sidebar__collapse-btn {
-      position: absolute;
-      right: 6px;
+    .sidebar__toggle {
+      justify-content: center;
     }
   }
 
@@ -182,6 +181,31 @@
   &__nav-label {
     font-size: 0.9rem;
     font-weight: 500;
+  }
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    margin: 0 8px 6px;
+    border-radius: 8px;
+    color: $text-muted;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    transition: $transition;
+    white-space: nowrap;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    &:hover {
+      color: $text-secondary;
+      background: var(--a-a06);
+    }
+  }
+
+  &__toggle-label {
+    font-size: 0.8125rem;
   }
 
   &__footer {
