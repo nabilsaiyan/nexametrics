@@ -112,12 +112,12 @@ export function Products() {
   const handleDismiss = useCallback(() => setDismissedLowStock(true), [])
 
   const tableColumns = useMemo<Column<Product>[]>(() => [
-    { key: 'name', label: 'Product', render: (p) => (<div><div style={{ color: '#eef0f8', fontWeight: 500 }}>{p.name}</div><div style={{ color: '#3e4a66', fontSize: '0.75rem' }}>{p.id}</div></div>) },
+    { key: 'name', label: 'Product', render: (p) => (<div><div style={{ color: 'var(--t1)', fontWeight: 500 }}>{p.name}</div><div style={{ color: 'var(--t3)', fontSize: '0.75rem' }}>{p.id}</div></div>) },
     { key: 'cat', label: 'Category', render: (p) => <Badge variant={p.category === 'Electronics' ? 'cyan' : p.category === 'Fashion' ? 'purple' : p.category === 'Home' ? 'green' : p.category === 'Sports' ? 'amber' : p.category === 'Beauty' ? 'red' : 'blue'}>{p.category}</Badge>, priority: 'medium' },
-    { key: 'price', label: 'Price', render: (p) => <span className="number" style={{ color: '#eef0f8', fontWeight: 600 }}>${p.price.toFixed(2)}</span>, sortable: true },
+    { key: 'price', label: 'Price', render: (p) => <span className="number" style={{ color: 'var(--t1)', fontWeight: 600 }}>${p.price.toFixed(2)}</span>, sortable: true },
     { key: 'stock', label: 'Stock', render: (p) => <StockPill stock={p.stock} />, priority: 'medium' },
-    { key: 'sold', label: 'Sold', render: (p) => <span className="number" style={{ color: '#7d8aa8' }}>{p.sold.toLocaleString()}</span>, sortable: true, priority: 'low' },
-    { key: 'revenue', label: 'Revenue', render: (p) => <span className="number" style={{ color: '#eef0f8', fontWeight: 600 }}>${Math.round(p.revenue / 1000)}k</span>, sortable: true },
+    { key: 'sold', label: 'Sold', render: (p) => <span className="number" style={{ color: 'var(--t2)' }}>{p.sold.toLocaleString()}</span>, sortable: true, priority: 'low' },
+    { key: 'revenue', label: 'Revenue', render: (p) => <span className="number" style={{ color: 'var(--t1)', fontWeight: 600 }}>${Math.round(p.revenue / 1000)}k</span>, sortable: true },
     { key: 'rating', label: 'Rating', render: (p) => <StarRating rating={p.rating} />, sortable: true, priority: 'medium' },
     { key: 'trend', label: 'Trend', render: (p) => <TrendIcon trend={p.trend} />, priority: 'low' },
   ], [])
