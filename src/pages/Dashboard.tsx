@@ -196,11 +196,11 @@ export function Dashboard() {
       key: 'customer', label: 'Customer', render: (o) => (
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Avatar src={o.customer.avatar} alt={o.customer.name} size={24} />
-          <span style={{ color: '#eef0f8', fontWeight: 500, fontSize: '0.8125rem' }}>{o.customer.name}</span>
+          <span style={{ color: 'var(--t1)', fontWeight: 500, fontSize: '0.8125rem' }}>{o.customer.name}</span>
         </div>
       ),
     },
-    { key: 'total', label: 'Amount', render: (o) => <span className="number" style={{ color: '#eef0f8', fontWeight: 600 }}>${o.total.toFixed(2)}</span>, priority: 'medium' as const },
+    { key: 'total', label: 'Amount', render: (o) => <span className="number" style={{ color: 'var(--t1)', fontWeight: 600 }}>${o.total.toFixed(2)}</span>, priority: 'medium' as const },
     { key: 'status', label: 'Status', render: (o) => { const s = STATUS_BADGE[o.status]; return <Badge variant={s.variant}>{s.label}</Badge> } },
     { key: 'date', label: 'Date', render: (o) => <span className="number" style={{ color: 'var(--chart-axis-label)', fontSize: '0.75rem' }}>{format(new Date(o.date), 'MMM dd, HH:mm')}</span>, priority: 'medium' as const },
     {

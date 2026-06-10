@@ -147,8 +147,8 @@ export function Customers() {
         <div className="customers__customer-cell">
           <Avatar src={c.avatar} alt={c.name} size={32} />
           <div>
-            <div style={{ color: '#eef0f8', fontWeight: 500 }}>{c.name}</div>
-            <div style={{ color: '#3e4a66', fontSize: '0.75rem' }}>{c.email}</div>
+            <div style={{ color: 'var(--t1)', fontWeight: 500 }}>{c.name}</div>
+            <div style={{ color: 'var(--t3)', fontSize: '0.75rem' }}>{c.email}</div>
           </div>
         </div>
       ),
