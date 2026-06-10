@@ -103,7 +103,7 @@ export function Sidebar() {
         <div className="sidebar__footer">
           <Link to="/profile" className="sidebar__user" onClick={mobileOpen ? closeMobile : undefined} aria-label="My profile">
             <img
-              src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin"
+              src="/avatar.png"
               alt="User avatar"
               className="sidebar__user-avatar"
             />

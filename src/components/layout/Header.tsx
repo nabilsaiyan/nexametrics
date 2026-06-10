@@ -195,13 +195,13 @@ export function Header() {
               aria-label="Open user menu"
               aria-expanded={profileOpen}
             >
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin" alt="Your avatar" className="header__avatar" />
+              <img src="/avatar.png" alt="Your avatar" className="header__avatar" />
             </button>
 
             {profileOpen && (
               <div className="header__profile-dropdown" role="menu">
                 <div className="header__profile-info">
-                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin" alt="" className="header__profile-avatar" aria-hidden="true" />
+                  <img src="/avatar.png" alt="" className="header__profile-avatar" aria-hidden="true" />
                   <div>
                     <div className="header__profile-name">Nabil Amhaouch</div>
                     <div className="header__profile-email">nabil@nexametrics.io</div>

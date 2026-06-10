@@ -99,7 +99,7 @@ export function Profile() {
       <section className="profile__hero">
         <div className="profile__avatar-wrap">
           <img
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=admin"
+            src="/avatar.png"
             alt="Your avatar"
             className="profile__avatar"
           />
